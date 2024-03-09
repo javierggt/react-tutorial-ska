@@ -34,9 +34,20 @@ function App() {
       });
   }, []);
 
+  const [filter, setFilter] = React.useState("");
+
+  const packages = package_info.packages.filter((pkg) =>
+    pkg.name.includes(filter)
+  );
+
   return (
     <>
       <h1> Ska Dashboard </h1>
+
+      <input
+        defaultValue={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
 
       <Table
         column_specs={{
@@ -59,7 +70,7 @@ function App() {
           "test",
           "test_status",
         ]}
-        data={package_info.packages}
+        data={packages}
       />
     </>
   );
