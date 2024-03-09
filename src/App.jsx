@@ -1,6 +1,6 @@
 import React from "react";
 
-import Table from "react-bootstrap/Table";
+import Table from "./table";
 
 import "./App.css";
 
@@ -104,33 +104,29 @@ const package_list = {
 };
 
 function App() {
-  const rows = package_list["packages"].map((pkg) => (
-    <tr>
-      <td>{pkg.name}</td>
-      <td>{pkg.owner}</td>
-      <td>{pkg.flight}</td>
-      <td>{pkg.matlab}</td>
-      <td>{pkg.test}</td>
-      <td>{pkg.test_status}</td>
-    </tr>
-  ));
-
   return (
     <>
       <h1> Ska Dashboard </h1>
-      <Table bordered hover striped variant="light">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Owner</th>
-            <th>Flight</th>
-            <th>Matlab</th>
-            <th>Test</th>
-            <th>Test Status</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
+
+      <Table
+        column_specs={{
+          name: { name: "name", title: "Name" },
+          owner: { name: "owner", title: "Organization" },
+          flight: { name: "flight", title: "Flight" },
+          matlab: { name: "matlab", title: "Matlab" },
+          test: { name: "test_version", title: "Test" },
+          test_status: { name: "test_status", title: "Test Status" },
+        }}
+        show_columns={[
+          "name",
+          "owner",
+          "flight",
+          "matlab",
+          "test",
+          "test_status",
+        ]}
+        data={package_list.packages}
+      />
     </>
   );
 }
