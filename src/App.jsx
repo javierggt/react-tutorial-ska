@@ -103,6 +103,15 @@ const package_list = {
   time: "2024-03-08T15:01:34.321073",
 };
 
+function test_status(pkg) {
+  if (pkg.test_status === "PASS") {
+    return "table-success";
+  } else if (pkg.test_status === "FAIL") {
+    return "table-danger";
+  }
+  return "table-default";
+}
+
 function App() {
   return (
     <>
@@ -115,7 +124,11 @@ function App() {
           flight: { name: "flight", title: "Flight", sort: version_sort },
           matlab: { name: "matlab", title: "Matlab", sort: version_sort },
           test: { name: "test_version", title: "Test", sort: version_sort },
-          test_status: { name: "test_status", title: "Test Status" },
+          test_status: {
+            name: "test_status",
+            title: "Test Status",
+            class: test_status,
+          },
         }}
         show_columns={[
           "name",
