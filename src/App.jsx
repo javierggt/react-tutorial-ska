@@ -1,6 +1,6 @@
 import React from "react";
 
-import Table from "./table";
+import Table, { version_sort } from "./table";
 
 import "./App.css";
 
@@ -112,9 +112,9 @@ function App() {
         column_specs={{
           name: { name: "name", title: "Name" },
           owner: { name: "owner", title: "Organization" },
-          flight: { name: "flight", title: "Flight" },
-          matlab: { name: "matlab", title: "Matlab" },
-          test: { name: "test_version", title: "Test" },
+          flight: { name: "flight", title: "Flight", sort: version_sort },
+          matlab: { name: "matlab", title: "Matlab", sort: version_sort },
+          test: { name: "test_version", title: "Test", sort: version_sort },
           test_status: { name: "test_status", title: "Test Status" },
         }}
         show_columns={[

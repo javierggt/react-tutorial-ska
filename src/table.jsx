@@ -4,6 +4,8 @@ import BootstrapTable from "react-bootstrap/Table";
 
 import { TbSortAscending2, TbSortDescending2 } from "react-icons/tb";
 
+import semver from "semver";
+
 function Table(props) {
   const [sort, setSort] = React.useState({ column: null, reverse: false });
 
@@ -137,4 +139,25 @@ function compare(col, reverse, fcn) {
 function lexicographic(a, b) {
   // comparison function for sorting strings
   return a.toString().localeCompare(b.toString());
+}
+
+export function version_sort(a, b) {
+  var v1 = semver.clean(a);
+  var v2 = semver.clean(b);
+  if (v1 == null && v2 == null) {
+    return 0;
+  }
+  if (v2 == null) {
+    return 1;
+  }
+  if (v1 == null) {
+    return -1;
+  }
+  if (semver.gt(v1, v2)) {
+    return 1;
+  }
+  if (semver.lt(v1, v2)) {
+    return -1;
+  }
+  return 0;
 }
