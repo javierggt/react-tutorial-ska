@@ -2,10 +2,20 @@ import React from "react";
 
 import BootstrapTable from "react-bootstrap/Table";
 
+import { TbSortAscending2, TbSortDescending2 } from "react-icons/tb";
+
 function Table(props) {
+  const [sort, setSort] = React.useState({ column: null, reverse: false });
+
   const column_specs = normalize_column_specs(props.column_specs);
 
-  const sort = props.sort;
+  function setSortColumn(col, event) {
+    if (col === sort.column) {
+      setSort({ column: col, reverse: !sort.reverse });
+    } else {
+      setSort({ column: col, reverse: false });
+    }
+  }
 
   return (
     <div>
@@ -13,7 +23,18 @@ function Table(props) {
         <thead>
           <tr>
             {props.show_columns.map((col, j) => (
-              <th key={j}>{column_specs[col].title}</th>
+              <th key={j} onClick={(event) => setSortColumn(col, event)}>
+                {column_specs[col].title}
+                {col === sort.column ? (
+                  sort.reverse ? (
+                    <TbSortAscending2 />
+                  ) : (
+                    <TbSortDescending2 />
+                  )
+                ) : (
+                  ""
+                )}
+              </th>
             ))}
           </tr>
         </thead>
