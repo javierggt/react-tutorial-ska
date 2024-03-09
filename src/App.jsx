@@ -126,6 +126,7 @@ function App() {
           "test_status",
         ]}
         data={package_list.packages}
+        sort={{ column: "name", reverse: false }}
       />
     </>
   );
